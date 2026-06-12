@@ -27,10 +27,12 @@ type DataState = {
 const configuredUrls = getConfiguredSheetUrls();
 const pages: Page[] = [
   { id: 'leaderboard', label: 'Leaderboard' },
-  { id: 'participants', label: 'Participant Details' },
-  { id: 'teams', label: 'Team Details' },
-  { id: 'rules', label: 'Rules Summary' },
+  { id: 'participants', label: 'Participants' },
+  { id: 'teams', label: 'Teams' },
+  { id: 'rules', label: 'Rules' },
 ];
+const worldCupEmblemSrc = '/2026_FIFA_World_Cup_emblem.png';
+const facebookGroupUrl = 'https://www.facebook.com/share/g/14rKTNnYfVr/';
 
 export function App() {
   const [activePage, setActivePage] = useState<PageId>('leaderboard');
@@ -84,8 +86,22 @@ export function App() {
   return (
     <main className="app-shell">
       <header className="hero">
-        <h1>World Cup 2026 Pool</h1>
-        <p>Up to date leaderboard for Zach Fenn&apos;s 2026 world cup pari-mutuel pool.</p>
+        <div className="hero-copy">
+          <h1>World Cup 2026 Pool</h1>
+          <p>Up to date leaderboard and information for Zach Fenn&rsquo;s pari-mutuel pool.</p>
+          <a
+            className="facebook-group-link"
+            href={facebookGroupUrl}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <span className="facebook-logo" aria-hidden="true">
+              <span className="facebook-logo-mark">f</span>
+            </span>
+            <span>Facebook Group</span>
+          </a>
+        </div>
+        <img className="hero-emblem" src={worldCupEmblemSrc} alt="FIFA World Cup 2026 emblem" />
       </header>
       <nav className="page-nav" aria-label="Dashboard pages">
         {pages.map((page) => (

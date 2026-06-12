@@ -1,4 +1,5 @@
 import type { PoolStandings } from '../domain/types';
+import { TeamNameWithFlag } from './TeamNameWithFlag';
 
 type ParticipantDetailProps = {
   standings: PoolStandings;
@@ -10,23 +11,35 @@ export function ParticipantDetail({ standings }: ParticipantDetailProps) {
   return (
     <section className="card">
       <div className="section-heading">
-        <h2>Participant Detail</h2>
+        <h2>Participants</h2>
       </div>
       <div className="detail-grid">
         {participants.map((participant) => (
           <article className="detail-card" key={participant.participantId}>
-            <h3>{participant.participantName}</h3>
-            <p className="metric">{formatPoints(participant.totalPoints)} pts</p>
-            <ul>
-              {participant.teams.map((team) => (
-                <li key={team.teamId}>
-                  <span className="detail-name">{team.teamName}</span>
-                  <span>
-                    {formatPercent(team.ownership)}, {formatPoints(team.points)} pts
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <div className="detail-card-heading">
+              <h3>{participant.participantName}</h3>
+              <p className="metric">{formatPoints(participant.totalPoints)} pts</p>
+            </div>
+            <table className="detail-table">
+              <thead>
+                <tr>
+                  <th>Country</th>
+                  <th>% Owned</th>
+                  <th>Points Earned</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...participant.teams].sort((a, b) => b.points - a.points).map((team) => (
+                  <tr key={team.teamId}>
+                    <td className="detail-name">
+                      <TeamNameWithFlag teamId={team.teamId} teamName={team.teamName} />
+                    </td>
+                    <td>{formatPercent(team.ownership)}</td>
+                    <td>{formatPoints(team.points)} pts</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </article>
         ))}
       </div>

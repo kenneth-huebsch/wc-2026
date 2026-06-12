@@ -1,4 +1,5 @@
 import type { PoolStandings } from '../domain/types';
+import { TeamNameWithFlag } from './TeamNameWithFlag';
 
 type TeamDetailProps = {
   standings: PoolStandings;
@@ -10,24 +11,35 @@ export function TeamDetail({ standings }: TeamDetailProps) {
   return (
     <section className="card">
       <div className="section-heading">
-        <h2>Team Detail</h2>
+        <h2>Teams</h2>
       </div>
       <div className="detail-grid">
         {teams.map((team) => (
           <article className="detail-card" key={team.teamId}>
-            <h3>{team.teamName}</h3>
-            <p className="metric">{formatPoints(team.carriedValue)} carried pts</p>
-            <ul>
-              {team.owners.map((owner) => (
-                <li key={owner.participantId}>
-                  <span className="detail-name">{owner.participantName}</span>
-                  <span>
-                    ${owner.amount}, {formatPercent(owner.ownership)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <div className="detail-divider" />
+            <div className="detail-card-heading">
+              <h3>
+                <TeamNameWithFlag teamId={team.teamId} teamName={team.teamName} />
+              </h3>
+              <p className="metric">{formatPoints(team.carriedValue)} pts</p>
+            </div>
+            <table className="detail-table">
+              <thead>
+                <tr>
+                  <th>Participant</th>
+                  <th>Amount</th>
+                  <th>% Owned</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...team.owners].sort((a, b) => b.ownership - a.ownership).map((owner) => (
+                  <tr key={owner.participantId}>
+                    <td className="detail-name">{owner.participantName}</td>
+                    <td>${owner.amount}</td>
+                    <td>{formatPercent(owner.ownership)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
             {team.scoringEvents.length > 0 ? (
               <ul>
                 {team.scoringEvents.map((event) => (

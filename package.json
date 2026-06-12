@@ -16,6 +16,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "flag-icons": "^7.5.0",
     "papaparse": "^5.5.3",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
