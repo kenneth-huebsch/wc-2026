@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  VITE_PARTICIPANTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSARfufG5l9v4W5O6aiUQTK3mzOCDLovZtQP1PQvqTJvbExzKiabbKYtAm8NRTQmK9mXWLKdp-Vtg5N/pub?gid=0&single=true&output=csv"
+  VITE_TEAMS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSARfufG5l9v4W5O6aiUQTK3mzOCDLovZtQP1PQvqTJvbExzKiabbKYtAm8NRTQmK9mXWLKdp-Vtg5N/pub?gid=1190894416&single=true&output=csv"
+  VITE_INVESTMENTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSARfufG5l9v4W5O6aiUQTK3mzOCDLovZtQP1PQvqTJvbExzKiabbKYtAm8NRTQmK9mXWLKdp-Vtg5N/pub?gid=79987491&single=true&output=csv"
+  VITE_GROUP_RESULTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSARfufG5l9v4W5O6aiUQTK3mzOCDLovZtQP1PQvqTJvbExzKiabbKYtAm8NRTQmK9mXWLKdp-Vtg5N/pub?gid=1087454901&single=true&output=csv"
+  VITE_MATCHES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSARfufG5l9v4W5O6aiUQTK3mzOCDLovZtQP1PQvqTJvbExzKiabbKYtAm8NRTQmK9mXWLKdp-Vtg5N/pub?gid=1604458596&single=true&output=csv"
