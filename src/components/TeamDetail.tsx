@@ -6,7 +6,7 @@ type TeamDetailProps = {
 };
 
 export function TeamDetail({ standings }: TeamDetailProps) {
-  const teams = Object.values(standings.teamSummaries).sort((a, b) => b.carriedValue - a.carriedValue);
+  const teams = Object.values(standings.teamSummaries).sort((a, b) => getTeamTotalPoints(b) - getTeamTotalPoints(a));
 
   return (
     <section className="card">
@@ -20,7 +20,7 @@ export function TeamDetail({ standings }: TeamDetailProps) {
               <h3>
                 <TeamNameWithFlag teamId={team.teamId} teamName={team.teamName} />
               </h3>
-              <p className="metric">{formatPoints(team.carriedValue)} pts</p>
+              <p className="metric">{formatPoints(getTeamTotalPoints(team))} pts</p>
             </div>
             <table className="detail-table">
               <thead>
@@ -61,6 +61,10 @@ export function TeamDetail({ standings }: TeamDetailProps) {
 
 function formatPercent(value: number): string {
   return `${(value * 100).toFixed(1)}%`;
+}
+
+function getTeamTotalPoints(team: PoolStandings['teamSummaries'][string]): number {
+  return team.scoringEvents.reduce((total, event) => total + event.points, 0);
 }
 
 function formatPoints(points: number): string {

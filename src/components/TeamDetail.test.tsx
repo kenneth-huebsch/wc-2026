@@ -12,9 +12,9 @@ describe('TeamDetail', () => {
           teamId: 'canada',
           teamName: 'Canada',
           group: 'C',
-          totalInvestment: 20,
-          carriedValue: 20,
-          owners: [{ participantId: 'devon', participantName: 'Devon', amount: 20, ownership: 1, points: 20 }],
+          totalInvestment: 500,
+          carriedValue: 500,
+          owners: [{ participantId: 'devon', participantName: 'Devon', amount: 500, ownership: 1, points: 0 }],
           scoringEvents: [],
         },
         france: {
@@ -27,7 +27,10 @@ describe('TeamDetail', () => {
             { participantId: 'alex', participantName: 'Alex', amount: 25, ownership: 0.2, points: 37 },
             { participantId: 'casey', participantName: 'Casey', amount: 100, ownership: 0.8, points: 148 },
           ],
-          scoringEvents: [{ round: 'group', teamId: 'france', points: 145, description: 'Advanced from Group I' }],
+          scoringEvents: [
+            { round: 'group', teamId: 'france', points: 145, description: 'Advanced from Group I' },
+            { round: 'round-of-32', teamId: 'france', points: 185, description: 'Won round-of-32' },
+          ],
         },
       },
     };
@@ -40,11 +43,14 @@ describe('TeamDetail', () => {
     const franceHeading = screen.getByRole('heading', { name: 'France' });
     const franceHeadingRow = franceHeading.parentElement as HTMLElement;
     const franceCard = franceHeading.closest('article');
+    const canadaHeading = screen.getByRole('heading', { name: 'Canada' });
+    const canadaHeadingRow = canadaHeading.parentElement as HTMLElement;
 
     expect(franceHeadingRow.className).toBe('detail-card-heading');
     expect(franceHeadingRow.querySelector('.fi.fi-fr')).toBeTruthy();
-    expect(within(franceHeadingRow).getByText('185 pts')).toBeTruthy();
+    expect(within(franceHeadingRow).getByText('330 pts')).toBeTruthy();
     expect(within(franceHeadingRow).queryByText('185 carried pts')).toBeNull();
+    expect(within(canadaHeadingRow).getByText('0 pts')).toBeTruthy();
     expect(franceCard).toBeTruthy();
 
     const ownersTable = within(franceCard as HTMLElement).getByRole('table');
